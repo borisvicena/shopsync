@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "zip": "node zip-project.js"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.15",
