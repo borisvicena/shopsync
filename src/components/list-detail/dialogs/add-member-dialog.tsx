@@ -9,13 +9,13 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { addMember, searchUserByEmail, USE_MOCKS } from '@/lib/api';
-import { ListMember, User } from '@/lib/types';
+import { User } from '@/lib/types';
 
 type AddMemberDialogProps = {
 	listId: string;
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
-	onMemberAdded?: (member: ListMember) => void;
+	onMemberAdded?: (member: User) => void;
 	existingEmails?: string[];
 };
 

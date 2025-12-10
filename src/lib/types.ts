@@ -14,14 +14,14 @@ export type User = {
 };
 
 // List Member types
-// export type ListMember = User & {
-// 	id: string;
-// 	name: string;
-// 	email: string;
-// 	avatarUrl?: string;
-// 	role: UserRole;
-// 	joinedAt: Date;
-// };
+export type ListMember = User & {
+	id: string;
+	name: string;
+	email: string;
+	avatarUrl?: string;
+	role: UserRole;
+	joinedAt: Date;
+};
 
 // Item types
 export type ListItem = {
@@ -72,6 +72,7 @@ export type AuthUser = {
 	name: string;
 	email: string;
 	token: string;
+	avatarUrl: string;
 };
 
 export type LoginCredentials = {

@@ -73,6 +73,7 @@ export async function login(credentials: LoginCredentials): Promise<AuthUser> {
 			name: user.name,
 			email: user.email,
 			token: `mock-token-${user.id}-${Date.now()}`,
+			avatarUrl: '',
 		};
 
 		setAuthToken(authUser.token);
@@ -104,6 +105,7 @@ export async function register(data: RegisterData): Promise<AuthUser> {
 			name: data.name,
 			email: data.email,
 			token: `mock-token-new-${Date.now()}`,
+			avatarUrl: '',
 		};
 
 		setAuthToken(authUser.token);
@@ -216,7 +218,7 @@ export async function getListById(listId: string): Promise<ShoppingList | null> 
 /**
  * Create a new shopping list
  */
-export async function createList(name: string): Promise<ShoppingListSummary | []> {
+export async function createList(name: string): Promise<ShoppingList | []> {
 	if (USE_MOCKS) {
 		await new Promise((resolve) => setTimeout(resolve, 300));
 
@@ -231,7 +233,6 @@ export async function createList(name: string): Promise<ShoppingListSummary | []
 				name: MOCK_CURRENT_USER.name,
 				email: MOCK_CURRENT_USER.email,
 				role: 'owner',
-				joinedAt: new Date(),
 			},
 			ownerId: String(MOCK_CURRENT_USER.id),
 			members: [
@@ -240,7 +241,6 @@ export async function createList(name: string): Promise<ShoppingListSummary | []
 					name: MOCK_CURRENT_USER.name,
 					email: MOCK_CURRENT_USER.email,
 					role: 'owner',
-					joinedAt: new Date(),
 				},
 			],
 			items: [],
@@ -255,9 +255,9 @@ export async function createList(name: string): Promise<ShoppingListSummary | []
 	// console.log(response);
 	// console.log(transformApiList(response));
 
-	const newLists = await getLists();
+	// const newLists = await getLists();
 
-	return newLists;
+	return transformApiList(response);
 }
 
 /**
@@ -502,7 +502,7 @@ export async function searchUserByEmail(email: string): Promise<User | null> {
 /**
  * Add member to a shopping list by email
  */
-export async function addMember(listId: string, userEmail: string): Promise<ListMember | null> {
+export async function addMember(listId: string, userEmail: string): Promise<User | null> {
 	if (USE_MOCKS) {
 		await new Promise((resolve) => setTimeout(resolve, 300));
 
@@ -516,21 +516,19 @@ export async function addMember(listId: string, userEmail: string): Promise<List
 
 		// Find user or create mock
 		const existingUser = getMockUserByEmail(userEmail);
-		const newMember: ListMember = existingUser
+		const newMember: User = existingUser
 			? {
 					id: existingUser.id,
 					name: existingUser.name,
 					email: existingUser.email,
 					avatarUrl: existingUser.avatarUrl,
 					role: 'member',
-					joinedAt: new Date(),
 			  }
 			: {
 					id: `user-${Date.now()}`,
 					name: userEmail.split('@')[0],
 					email: userEmail,
 					role: 'member',
-					joinedAt: new Date(),
 			  };
 
 		updateMockList(listId, {
@@ -562,7 +560,6 @@ export async function addMember(listId: string, userEmail: string): Promise<List
 			email: user.email,
 			avatarUrl: user.avatarUrl,
 			role: 'member',
-			joinedAt: new Date(),
 		};
 	} catch (error) {
 		if (error instanceof ApiClientError) {

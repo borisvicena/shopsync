@@ -62,7 +62,6 @@ export function transformApiListToSummary(apiList: ApiShoppingList): ShoppingLis
 		id: String(apiList.id),
 		name: apiList.name,
 		ownerId: String(apiList.owner_id),
-		role: null,
 		// role: isOwner ? 'owner' : 'member',
 		itemStats: {
 			total: totalItems,

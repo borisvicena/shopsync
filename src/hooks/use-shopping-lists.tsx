@@ -33,7 +33,7 @@ interface UseListsReturn {
 	isLoading: boolean;
 	error: Error | null;
 	refetch: () => Promise<void>;
-	createNewList: (name: string) => Promise<ShoppingList | null>;
+	createNewList: (name: string) => Promise<ShoppingList | []>;
 	archiveListById: (id: string) => Promise<boolean>;
 	unarchiveListById: (id: string) => Promise<boolean>;
 	deleteListById: (id: string) => Promise<boolean>;
@@ -63,17 +63,17 @@ export function useLists(): UseListsReturn {
 	}, [fetchLists]);
 
 	const createNewList = useCallback(
-		async (name: string): Promise<ShoppingList | null> => {
+		async (name: string): Promise<ShoppingList | []> => {
 			try {
 				console.log('Create new list: ', name);
 				const newList = await createList(name);
 				console.log(newList);
-				await fetchLists(); // Refetch to update the list
+				// await fetchLists(); // Refetch to update the list
 				// console.log(newList);
 				return newList;
 			} catch (err) {
 				setError(err instanceof Error ? err : new Error('Failed to create list'));
-				return null;
+				return [];
 			}
 		},
 		[fetchLists]
