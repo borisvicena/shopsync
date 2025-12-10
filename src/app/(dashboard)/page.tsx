@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Metadata } from "next";
 import { HomeContent } from "@/components/home/home-content";
 import { HomePageSkeleton } from "@/components/home/home-page-skeleton";
+import AuthGuard from "@/components/auth/auth-guard";
 
 export const metadata: Metadata = {
   title: "Shopsync | Your Shopping Lists",
@@ -10,8 +11,10 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <Suspense fallback={<HomePageSkeleton />}>
-      <HomeContent />
-    </Suspense>
+    <AuthGuard fallback={<HomePageSkeleton />}>
+      <Suspense fallback={<HomePageSkeleton />}>
+        <HomeContent />
+      </Suspense>
+    </AuthGuard>
   );
 }
