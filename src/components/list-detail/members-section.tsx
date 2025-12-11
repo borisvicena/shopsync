@@ -68,7 +68,7 @@ export function MembersSection({ owner, members, isOwner, onRemoveMember, onAddM
 				)}
 			</Card>
 
-			<RemoveMemberDialog memberToRemove={memberToRemove} setMemberToRemove={setMemberToRemove} handleRemoveMember={handleConfirmRemove} />
+			<RemoveMemberDialog memberToRemove={memberToRemove} setMemberToRemove={setMemberToRemove} handleConfirmRemove={handleConfirmRemove} />
 		</>
 	);
 }

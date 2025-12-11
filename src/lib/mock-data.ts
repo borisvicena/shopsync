@@ -45,7 +45,7 @@ export const MOCK_USERS: User[] = [
 
 // Current logged in user (for mock mode)
 export const MOCK_CURRENT_USER: AuthUser = {
-	id: 1,
+	id: '1' as unknown as number, // Use string to match User.id type
 	username: 'demouser',
 	name: 'Demo User',
 	email: 'demo@example.com',
@@ -67,22 +67,17 @@ export const MOCK_LISTS: ShoppingList[] = [
 		ownerId: '1',
 		owner: {
 			id: '1',
-			name: 'Charlie Brown',
-			email: 'charlie@example.com',
+			name: 'Demo User',
+			email: 'demo@example.com',
 			avatarUrl: undefined,
 		},
 		members: [
-			{
-				id: '1',
-				name: 'Demo User',
-				email: 'demo@example.com',
-				role: 'owner',
-			},
 			{
 				id: '2',
 				name: 'Jane Smith',
 				email: 'jane@example.com',
 				role: 'member',
+				joinedAt: new Date('2025-01-16T10:00:00'),
 			},
 		],
 		items: [
@@ -161,28 +156,24 @@ export const MOCK_LISTS: ShoppingList[] = [
 		ownerId: '1',
 		owner: {
 			id: '1',
-			name: 'Charlie Brown',
-			email: 'charlie@example.com',
+			name: 'Demo User',
+			email: 'demo@example.com',
 			avatarUrl: undefined,
 		},
 		members: [
-			{
-				id: '1',
-				name: 'Demo User',
-				email: 'demo@example.com',
-				role: 'owner',
-			},
 			{
 				id: '3',
 				name: 'Bob Wilson',
 				email: 'bob@example.com',
 				role: 'member',
+				joinedAt: new Date('2025-01-11T09:00:00'),
 			},
 			{
 				id: '4',
 				name: 'Alice Johnson',
 				email: 'alice@example.com',
 				role: 'member',
+				joinedAt: new Date('2025-01-12T14:00:00'),
 			},
 		],
 		items: [
@@ -239,22 +230,17 @@ export const MOCK_LISTS: ShoppingList[] = [
 		ownerId: '1',
 		owner: {
 			id: '1',
-			name: 'Charlie Brown',
-			email: 'charlie@example.com',
+			name: 'Demo User',
+			email: 'demo@example.com',
 			avatarUrl: undefined,
 		},
 		members: [
-			{
-				id: '1',
-				name: 'Demo User',
-				email: 'demo@example.com',
-				role: 'owner',
-			},
 			{
 				id: '2',
 				name: 'Jane Smith',
 				email: 'jane@example.com',
 				role: 'member',
+				joinedAt: new Date('2024-12-21T10:00:00'),
 			},
 		],
 		items: [
@@ -302,18 +288,11 @@ export const MOCK_LISTS: ShoppingList[] = [
 		ownerId: '1',
 		owner: {
 			id: '1',
-			name: 'Charlie Brown',
-			email: 'charlie@example.com',
+			name: 'Demo User',
+			email: 'demo@example.com',
 			avatarUrl: undefined,
 		},
-		members: [
-			{
-				id: '1',
-				name: 'Demo User',
-				email: 'demo@example.com',
-				role: 'owner',
-			},
-		],
+		members: [],
 		items: [
 			{
 				id: '14',

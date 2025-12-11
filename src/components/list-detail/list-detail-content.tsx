@@ -155,8 +155,7 @@ export function ListDetailContent({ listId }: { listId: string }) {
 		}
 	};
 
-	const isOwner = listData.owner.id === auth.user?.id;
-	console.log(typeof auth.user?.id);
+	const isOwner = listData.owner.id === String(auth.user?.id);
 
 	return (
 		<main className="min-h-screen bg-linear-to-b from-zinc-50 to-white">
@@ -226,8 +225,14 @@ export function ListDetailContent({ listId }: { listId: string }) {
 				open={isAddMemberOpen}
 				onOpenChange={setIsAddMemberOpen}
 				onMemberAdded={(member) => {
-					// Refresh list alebo pridaj do state
-					// refetct();
+					setListData((prev) =>
+						prev
+							? {
+									...prev,
+									members: [...prev.members, member],
+							  }
+							: prev
+					);
 				}}
 				existingEmails={listData.members.map((m) => m.email)}
 			/>

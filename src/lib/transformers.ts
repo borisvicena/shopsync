@@ -29,10 +29,8 @@ export function transformApiItem(apiItem: ApiItem, createdBy?: string): ListItem
 /**
  * Transform API shopping list to frontend ShoppingList
  */
-export function transformApiList(apiList: ApiShoppingList, members: User[] = [], currentUserId?: string): ShoppingList {
+export function transformApiList(apiList: ApiShoppingList, _members: User[] = [], _currentUserId?: string): ShoppingList {
 	const ownerId = String(apiList.owner_id);
-
-	console.log(apiList, members, currentUserId);
 
 	return {
 		id: String(apiList.id),

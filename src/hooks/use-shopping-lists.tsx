@@ -65,11 +65,8 @@ export function useLists(): UseListsReturn {
 	const createNewList = useCallback(
 		async (name: string): Promise<ShoppingList | []> => {
 			try {
-				console.log('Create new list: ', name);
 				const newList = await createList(name);
-				console.log(newList);
-				// await fetchLists(); // Refetch to update the list
-				// console.log(newList);
+				await fetchLists(); // Refetch to update the list
 				return newList;
 			} catch (err) {
 				setError(err instanceof Error ? err : new Error('Failed to create list'));

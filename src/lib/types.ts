@@ -10,17 +10,13 @@ export type User = {
 	name: string;
 	email: string;
 	avatarUrl?: string;
-	role?: string;
+	role?: UserRole;
 };
 
 // List Member types
 export type ListMember = User & {
-	id: string;
-	name: string;
-	email: string;
-	avatarUrl?: string;
-	role: UserRole;
-	joinedAt: Date;
+	role?: UserRole;
+	joinedAt?: Date;
 };
 
 // Item types
@@ -45,7 +41,7 @@ export type ShoppingList = {
 	isArchived: boolean;
 	ownerId: string;
 	owner: User;
-	members: User[];
+	members: ListMember[];
 	items: ListItem[];
 };
 

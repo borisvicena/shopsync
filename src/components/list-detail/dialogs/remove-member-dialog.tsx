@@ -10,8 +10,15 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { User } from '@/lib/types';
 
-export function RemoveMemberDialog({ memberToRemove, setMemberToRemove, handleConfirmRemove }: any) {
+type RemoveMemberDialogProps = {
+	memberToRemove: User | null;
+	setMemberToRemove: (member: User | null) => void;
+	handleConfirmRemove: () => void;
+};
+
+export function RemoveMemberDialog({ memberToRemove, setMemberToRemove, handleConfirmRemove }: RemoveMemberDialogProps) {
 	return (
 		<AlertDialog open={!!memberToRemove} onOpenChange={(open) => !open && setMemberToRemove(null)}>
 			<AlertDialogContent>
