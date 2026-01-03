@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChevronLeft, Plus, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { ListHeader } from './list-header';
@@ -17,6 +18,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { ItemsList } from './item-list';
 import { useAuth } from '@/contexts/auth-context';
+import { ListDetailItemsChart } from '@/components/charts/list-detail-items-chart';
 
 type TabValue = 'unresolved' | 'all' | 'resolved';
 
@@ -179,6 +181,18 @@ export function ListDetailContent({ listId }: { listId: string }) {
 						onRemoveMember={handleRemoveMember}
 						onAddMember={() => setIsAddMemberOpen(true)}
 					/>
+
+					{/* Items Progress Chart */}
+					{listData.items.length > 0 && (
+						<Card>
+							<CardHeader>
+								<CardTitle>Items Progress</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<ListDetailItemsChart items={listData.items} />
+							</CardContent>
+						</Card>
+					)}
 
 					<div className="space-y-6">
 						<div className="flex items-center justify-between gap-4">

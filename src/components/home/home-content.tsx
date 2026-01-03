@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Plus, Search, ShoppingBag, Archive, X } from 'lucide-react';
 import { ListCard } from './list-card';
 import { CreateListDialog } from './dialogs/create-list-dialog';
@@ -13,6 +14,7 @@ import { useLists } from '@/hooks/use-shopping-lists';
 import { Spinner } from '../ui/spinner';
 import { toast } from 'sonner';
 import ListGrid from './list-grid';
+import { DashboardListSummaryChart } from '@/components/charts/dashboard-list-summary-chart';
 
 type TabValue = 'active' | 'archived';
 
@@ -117,6 +119,18 @@ export function HomeContent() {
 							</p>
 						)}
 					</header>
+
+					{/* Lists Overview Chart */}
+					{activeLists.length > 0 && (
+						<Card>
+							<CardHeader>
+								<CardTitle>Lists Overview</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<DashboardListSummaryChart lists={activeLists} />
+							</CardContent>
+						</Card>
+					)}
 
 					{/* Toolbar */}
 					<div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
