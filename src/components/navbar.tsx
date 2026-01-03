@@ -26,6 +26,7 @@ import { User, Settings, LogOut, ShoppingCart, Database } from 'lucide-react';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/auth-context';
 import { USE_MOCKS } from '@/lib/api';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 export default function Navbar() {
 	const { user, logout, isAuthenticated } = useAuth();
@@ -71,6 +72,9 @@ export default function Navbar() {
 								Mock Mode
 							</Badge>
 						)}
+
+						{/* Theme Toggle */}
+						<ThemeToggle />
 
 						{isAuthenticated && user ? (
 							/* User Menu */
