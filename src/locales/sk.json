@@ -1,0 +1,20 @@
+{
+	"navbar": {
+		"myProfile": "Môj profil",
+		"logOut": "Odhlásiť sa",
+		"signIn": "Prihlásenie",
+		"signUp": "Registrácia",
+		"mockMode": "Demo režim",
+		"logoutDialog": {
+			"title": "Odhlásiť sa",
+			"description": "Naozaj sa chcete odhlásiť? Na prístup k vašim nákupným zoznamom sa budete musieť znova prihlásiť.",
+			"cancel": "Zrušiť",
+			"confirm": "Odhlásiť sa"
+		}
+	},
+	"common": {
+		"loading": "Načítava sa...",
+		"cancel": "Zrušiť",
+		"save": "Uložiť"
+	}
+}

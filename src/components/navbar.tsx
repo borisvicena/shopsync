@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import '@/lib/i18n';
 import {
 	DropdownMenu,
 	DropdownMenuTrigger,
@@ -27,8 +29,10 @@ import Link from 'next/link';
 import { useAuth } from '@/contexts/auth-context';
 import { USE_MOCKS } from '@/lib/api';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { LanguageSelector } from '@/components/language-selector';
 
 export default function Navbar() {
+	const { t } = useTranslation();
 	const { user, logout, isAuthenticated } = useAuth();
 	const [showLogoutDialog, setShowLogoutDialog] = useState(false);
 
@@ -69,9 +73,12 @@ export default function Navbar() {
 						{USE_MOCKS && (
 							<Badge variant="secondary" className="gap-1 hidden sm:flex">
 								<Database className="h-3 w-3" />
-								Mock Mode
+								{t('navbar.mockMode')}
 							</Badge>
 						)}
+
+						{/* Language Selector */}
+						<LanguageSelector />
 
 						{/* Theme Toggle */}
 						<ThemeToggle />
@@ -100,7 +107,7 @@ export default function Navbar() {
 									<DropdownMenuItem asChild>
 										<Link href="/profile" className="cursor-pointer">
 											<User className="mr-2 h-4 w-4" />
-											My Profile
+											{t('navbar.myProfile')}
 										</Link>
 									</DropdownMenuItem>
 									<DropdownMenuSeparator />
@@ -109,7 +116,7 @@ export default function Navbar() {
 										className="cursor-pointer text-red-600 focus:bg-red-50 focus:text-red-600"
 									>
 										<LogOut className="mr-2 h-4 w-4" />
-										Log Out
+										{t('navbar.logOut')}
 									</DropdownMenuItem>
 								</DropdownMenuContent>
 							</DropdownMenu>
@@ -117,10 +124,10 @@ export default function Navbar() {
 							/* Login/Signup Buttons */
 							<div className="flex items-center gap-2">
 								<Button variant="ghost" asChild>
-									<Link href="/login">Sign In</Link>
+									<Link href="/login">{t('navbar.signIn')}</Link>
 								</Button>
 								<Button asChild>
-									<Link href="/signup">Sign Up</Link>
+									<Link href="/signup">{t('navbar.signUp')}</Link>
 								</Button>
 							</div>
 						)}
@@ -132,14 +139,14 @@ export default function Navbar() {
 			<AlertDialog open={showLogoutDialog} onOpenChange={setShowLogoutDialog}>
 				<AlertDialogContent>
 					<AlertDialogHeader>
-						<AlertDialogTitle>Log Out</AlertDialogTitle>
+						<AlertDialogTitle>{t('navbar.logoutDialog.title')}</AlertDialogTitle>
 						<AlertDialogDescription>
-							Are you sure you want to log out? You'll need to sign in again to access your shopping lists.
+							{t('navbar.logoutDialog.description')}
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter>
-						<AlertDialogCancel>Cancel</AlertDialogCancel>
-						<AlertDialogAction onClick={handleLogout}>Log Out</AlertDialogAction>
+						<AlertDialogCancel>{t('navbar.logoutDialog.cancel')}</AlertDialogCancel>
+						<AlertDialogAction onClick={handleLogout}>{t('navbar.logoutDialog.confirm')}</AlertDialogAction>
 					</AlertDialogFooter>
 				</AlertDialogContent>
 			</AlertDialog>

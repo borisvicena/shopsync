@@ -1,0 +1,20 @@
+{
+	"navbar": {
+		"myProfile": "My Profile",
+		"logOut": "Log Out",
+		"signIn": "Sign In",
+		"signUp": "Sign Up",
+		"mockMode": "Mock Mode",
+		"logoutDialog": {
+			"title": "Log Out",
+			"description": "Are you sure you want to log out? You'll need to sign in again to access your shopping lists.",
+			"cancel": "Cancel",
+			"confirm": "Log Out"
+		}
+	},
+	"common": {
+		"loading": "Loading...",
+		"cancel": "Cancel",
+		"save": "Save"
+	}
+}
