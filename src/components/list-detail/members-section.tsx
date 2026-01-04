@@ -1,14 +1,20 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Plus, Users, Mail } from 'lucide-react';
-import { OwnerRow } from './owner-row';
+import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { UserPlus, Crown } from 'lucide-react';
 import { RemoveMemberDialog } from './dialogs/remove-member-dialog';
 import { User } from '@/lib/types';
-import { MemberRow } from './member-row';
-import { Alert, AlertTitle } from '../ui/alert';
+import { getInitials } from '@/lib/utils';
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 type MembersSectionProps = {
 	owner: User;
@@ -28,45 +34,91 @@ export function MembersSection({ owner, members, isOwner, onRemoveMember, onAddM
 		}
 	};
 
-	// Calculate the total members length with owner (+ 1)
 	const totalMembersLength = members.length + 1;
+	const visibleMembers = members.slice(0, 3);
+	const remainingCount = members.length - 3;
 
 	return (
 		<>
-			<Card className="inset-shadow-xs shadow-sm">
-				<CardHeader>
-					<CardTitle>Members</CardTitle>
-					<CardDescription className="inline-flex items-center gap-1 text-xs text-muted-foreground">
-						<Users size={14} />
-						{totalMembersLength}
-					</CardDescription>
-					<CardAction>
-						{isOwner && (
-							<Button size="sm" variant="outline" onClick={onAddMember} className="text-xs h-7">
-								<Plus />
-								Invite
-							</Button>
-						)}
-					</CardAction>
-				</CardHeader>
+			<div className="flex flex-wrap items-center gap-4 rounded-lg border bg-card p-4">
+				{/* Owner Avatar + Name */}
+				<div className="flex items-center gap-2">
+					<div className="relative">
+						<Avatar className="h-10 w-10">
+							<AvatarImage src={owner.avatarUrl} alt={owner.name} />
+							<AvatarFallback className="bg-primary/10 text-primary text-sm font-medium">
+								{getInitials(owner.name)}
+							</AvatarFallback>
+						</Avatar>
+						<div className="absolute -bottom-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-amber-500 ring-2 ring-card">
+							<Crown className="h-2.5 w-2.5 text-white" />
+						</div>
+					</div>
+					<div className="flex flex-col">
+						<p className="text-sm font-medium text-foreground">{owner.name}</p>
+						<Badge variant="secondary" className="text-xs w-fit">
+							Owner
+						</Badge>
+					</div>
+				</div>
 
-				<CardContent>
-					<OwnerRow owner={owner} />
-
-					{members.map((member) => (
-						<MemberRow key={member.id} member={member} canRemove={isOwner} onRemove={() => setMemberToRemove(member)} />
-					))}
-				</CardContent>
-
-				{totalMembersLength === 1 && isOwner && (
-					<CardFooter className="w-full">
-						<Alert className="bg-muted/20 border-dashed text-muted-foreground">
-							<Mail />
-							<AlertTitle>Invite others to collaborate on this shopping list</AlertTitle>
-						</Alert>
-					</CardFooter>
+				{/* Member Avatars (max 3, then +N) */}
+				{members.length > 0 && (
+					<div className="flex items-center gap-2">
+						<div className="flex -space-x-2">
+							{visibleMembers.map((member) => (
+								<Avatar key={member.id} className="h-10 w-10 border-2 border-background">
+									<AvatarImage src={member.avatarUrl} alt={member.name} />
+									<AvatarFallback className="bg-muted text-muted-foreground text-sm font-medium">
+										{getInitials(member.name)}
+									</AvatarFallback>
+								</Avatar>
+							))}
+							{remainingCount > 0 && (
+								<DropdownMenu>
+									<DropdownMenuTrigger asChild>
+										<button className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-background bg-muted text-xs font-medium text-muted-foreground hover:bg-muted/80 transition-colors">
+											+{remainingCount}
+										</button>
+									</DropdownMenuTrigger>
+									<DropdownMenuContent align="start" className="w-56">
+										{members.slice(3).map((member) => (
+											<DropdownMenuItem key={member.id} className="flex items-center gap-2">
+												<Avatar className="h-6 w-6">
+													<AvatarImage src={member.avatarUrl} alt={member.name} />
+													<AvatarFallback className="text-xs">{getInitials(member.name)}</AvatarFallback>
+												</Avatar>
+												<div className="flex flex-col">
+													<span className="text-sm font-medium">{member.name}</span>
+													<span className="text-xs text-muted-foreground">{member.email}</span>
+												</div>
+											</DropdownMenuItem>
+										))}
+									</DropdownMenuContent>
+								</DropdownMenu>
+							)}
+						</div>
+						<span className="text-sm text-muted-foreground">
+							{members.length === 1 ? '1 member' : `${members.length} members`}
+						</span>
+					</div>
 				)}
-			</Card>
+
+				{/* Invite Button */}
+				{isOwner && (
+					<Button variant="outline" size="sm" onClick={onAddMember} className="ml-auto gap-2">
+						<UserPlus className="h-4 w-4" />
+						<span>Invite</span>
+					</Button>
+				)}
+
+				{/* Empty state text */}
+				{members.length === 0 && (
+					<p className="text-sm text-muted-foreground ml-auto">
+						No collaborators yet {isOwner && '• Click Invite to add members'}
+					</p>
+				)}
+			</div>
 
 			<RemoveMemberDialog memberToRemove={memberToRemove} setMemberToRemove={setMemberToRemove} handleConfirmRemove={handleConfirmRemove} />
 		</>

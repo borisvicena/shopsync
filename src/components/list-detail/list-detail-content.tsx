@@ -3,8 +3,10 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ChevronLeft, Plus, Loader2 } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { ChevronLeft, Plus, Loader2, ShoppingCart, CheckCircle2, Circle } from 'lucide-react';
 import Link from 'next/link';
 import { ListHeader } from './list-header';
 import { MembersSection } from './members-section';
@@ -159,21 +161,69 @@ export function ListDetailContent({ listId }: { listId: string }) {
 
 	const isOwner = listData.owner.id === String(auth.user?.id);
 
+	const totalItems = listData.items.length;
+	const completedItems = listData.items.filter((item) => item.completed).length;
+	const pendingItems = totalItems - completedItems;
+	const completionRate = totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0;
+
 	return (
-		<main className="min-h-screen bg-linear-to-b from-zinc-50 to-white">
+		<main className="min-h-screen bg-background">
 			<div className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
-				<div className="space-y-8">
+				<div className="space-y-6">
+					{/* Back Navigation */}
 					<Link
 						href="/"
-						className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900"
+						className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
 						aria-label="Back to lists"
 					>
 						<ChevronLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
 						<span>Back to Lists</span>
 					</Link>
 
-					<ListHeader name={listData.name} isOwner={isOwner} onUpdate={() => setIsUpdateListOpen(true)} />
+					{/* List Header */}
+					<ListHeader
+						name={listData.name}
+						isOwner={isOwner}
+						isArchived={listData.isArchived}
+						createdAt={listData.createdAt}
+						updatedAt={listData.updatedAt}
+						onUpdate={() => setIsUpdateListOpen(true)}
+					/>
 
+					{/* Progress Overview Bar */}
+					{totalItems > 0 && (
+						<div className="rounded-lg border bg-card p-4 space-y-3">
+							<div className="flex items-center justify-between text-sm">
+								<div className="flex items-center gap-6">
+									<div className="flex items-center gap-2">
+										<ShoppingCart className="h-4 w-4 text-muted-foreground" />
+										<span className="font-medium">{totalItems}</span>
+										<span className="text-muted-foreground">
+											{totalItems === 1 ? 'item' : 'items'}
+										</span>
+									</div>
+									<div className="h-4 w-px bg-border" />
+									<div className="flex items-center gap-2">
+										<CheckCircle2 className="h-4 w-4 text-green-600" />
+										<span className="font-medium">{completedItems}</span>
+										<span className="text-muted-foreground">completed</span>
+									</div>
+									<div className="h-4 w-px bg-border" />
+									<div className="flex items-center gap-2">
+										<Circle className="h-4 w-4 text-amber-600" />
+										<span className="font-medium">{pendingItems}</span>
+										<span className="text-muted-foreground">pending</span>
+									</div>
+								</div>
+								<Badge variant="secondary" className="text-sm font-semibold">
+									{completionRate}% complete
+								</Badge>
+							</div>
+							<Progress value={completionRate} className="h-2" />
+						</div>
+					)}
+
+					{/* Members Section */}
 					<MembersSection
 						owner={listData.owner}
 						isOwner={isOwner}
@@ -182,11 +232,12 @@ export function ListDetailContent({ listId }: { listId: string }) {
 						onAddMember={() => setIsAddMemberOpen(true)}
 					/>
 
-					{/* Items Progress Chart */}
+					{/* Chart */}
 					{listData.items.length > 0 && (
 						<Card>
 							<CardHeader>
 								<CardTitle>Items Progress</CardTitle>
+								<CardDescription>Visual breakdown of completed and pending items</CardDescription>
 							</CardHeader>
 							<CardContent>
 								<ListDetailItemsChart items={listData.items} />

@@ -23,14 +23,14 @@ export function ListDetailItemsChart({ items }: ListDetailItemsChartProps) {
 
 	if (items.length === 0) {
 		return (
-			<div className="flex h-[280px] items-center justify-center text-sm text-muted-foreground">
+			<div className="flex h-[240px] sm:h-[260px] lg:h-[280px] items-center justify-center text-sm text-muted-foreground">
 				No items to display
 			</div>
 		);
 	}
 
 	return (
-		<div className="w-full h-[280px] sm:h-[300px]">
+		<div className="w-full h-[240px] sm:h-[260px] lg:h-[280px]">
 			<ResponsiveContainer width="100%" height="100%">
 				<PieChart>
 					<Pie
@@ -42,7 +42,7 @@ export function ListDetailItemsChart({ items }: ListDetailItemsChartProps) {
 							const percentage = (percent * 100).toFixed(0);
 							return `${name}: ${value} (${percentage}%)`;
 						}}
-						outerRadius="70%"
+						outerRadius="55%"
 						fill="#8884d8"
 						dataKey="value"
 					>
