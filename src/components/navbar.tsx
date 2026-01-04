@@ -62,7 +62,7 @@ export default function Navbar() {
 						<div className="flex h-8 w-8 items-center justify-center">
 							<img src="/icon.svg" />
 						</div>
-						<span className="hidden sm:inline text-primary tracking-tight">
+						<span className="sm:inline text-primary tracking-tight">
 							Shop<span className="text-foreground">sync</span>
 						</span>
 					</Link>
