@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Plus, Search, ShoppingBag, Archive, X } from 'lucide-react';
 import { ListCard } from './list-card';
 import { CreateListDialog } from './dialogs/create-list-dialog';
@@ -15,6 +15,8 @@ import { Spinner } from '../ui/spinner';
 import { toast } from 'sonner';
 import ListGrid from './list-grid';
 import { DashboardListSummaryChart } from '@/components/charts/dashboard-list-summary-chart';
+import { StatsCards } from './stats-cards';
+import { QuickStats } from './quick-stats';
 
 type TabValue = 'active' | 'archived';
 
@@ -120,16 +122,26 @@ export function HomeContent() {
 						)}
 					</header>
 
-					{/* Lists Overview Chart */}
+					{/* Stats Cards */}
+					{activeLists.length > 0 && <StatsCards lists={activeLists} />}
+
+					{/* Chart & Quick Stats */}
 					{activeLists.length > 0 && (
-						<Card>
-							<CardHeader>
-								<CardTitle>Lists Overview</CardTitle>
-							</CardHeader>
-							<CardContent>
-								<DashboardListSummaryChart lists={activeLists} />
-							</CardContent>
-						</Card>
+						<div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+							{/* Chart */}
+							<Card className="lg:col-span-7">
+								<CardHeader>
+									<CardTitle>Lists Overview</CardTitle>
+									<CardDescription>Distribution of your shopping lists</CardDescription>
+								</CardHeader>
+								<CardContent>
+									<DashboardListSummaryChart lists={activeLists} />
+								</CardContent>
+							</Card>
+
+							{/* Quick Stats */}
+							<QuickStats lists={activeLists} />
+						</div>
 					)}
 
 					{/* Toolbar */}

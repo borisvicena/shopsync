@@ -23,7 +23,7 @@ export function DashboardListSummaryChart({ lists }: DashboardListSummaryChartPr
 	const totalLists = chartData.reduce((sum, item) => sum + item.value, 0);
 
 	return (
-		<div className="w-full h-[300px] sm:h-[350px] lg:h-[400px]">
+		<div className="w-full h-[220px] sm:h-[240px] lg:h-[260px]">
 			<ResponsiveContainer width="100%" height="100%">
 				<PieChart>
 					<Pie
@@ -35,7 +35,7 @@ export function DashboardListSummaryChart({ lists }: DashboardListSummaryChartPr
 							const percentage = (percent * 100).toFixed(0);
 							return `${name}: ${value} (${percentage}%)`;
 						}}
-						outerRadius="70%"
+						outerRadius="60%"
 						fill="#8884d8"
 						dataKey="value"
 					>
