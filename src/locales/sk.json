@@ -15,6 +15,208 @@
 	"common": {
 		"loading": "Načítava sa...",
 		"cancel": "Zrušiť",
-		"save": "Uložiť"
+		"save": "Uložiť",
+		"delete": "Zmazať",
+		"edit": "Upraviť",
+		"add": "Pridať",
+		"create": "Vytvoriť",
+		"update": "Aktualizovať",
+		"remove": "Odstrániť",
+		"invite": "Pozvať",
+		"close": "Zavrieť",
+		"confirm": "Potvrdiť",
+		"back": "Späť"
+	},
+	"home": {
+		"title": "Nákupné zoznamy",
+		"itemsToBuy": "položiek na kúpenie v",
+		"lists": "zoznamoch",
+		"allCaughtUp": "Všetko hotové! 🎉",
+		"searchPlaceholder": "Vyhľadať zoznamy...",
+		"newList": "Nový zoznam",
+		"results": "výsledok",
+		"results_plural": "výsledkov",
+		"tabs": {
+			"active": "Aktívne",
+			"archived": "Archivované"
+		},
+		"stats": {
+			"totalLists": "Celkom zoznamov",
+			"totalItems": "Celkom položiek",
+			"itemsCompleted": "Dokončené položky",
+			"completionRate": "Miera dokončenia",
+			"activeList": "aktívny zoznam",
+			"activeLists": "aktívnych zoznamov",
+			"itemToTrack": "položka na sledovanie",
+			"itemsToTrack": "položiek na sledovanie",
+			"of": "z",
+			"done": "hotovo",
+			"overallProgress": "celkový pokrok"
+		},
+		"quickStats": {
+			"title": "Rýchly prehľad",
+			"description": "Kľúčové štatistiky na prvý pohľad",
+			"mostActiveList": "Najaktívnejší zoznam",
+			"noListsYet": "Zatiaľ žiadne zoznamy",
+			"items": "položiek",
+			"nearlyComplete": "Takmer hotové",
+			"noListsCloseToCompletion": "Žiadne zoznamy blízko dokončenia",
+			"listAlmostDone": "zoznam je takmer hotový",
+			"listsAlmostDone": "zoznamy sú takmer hotové",
+			"complete": "hotovo",
+			"needsAttention": "Vyžaduje pozornosť",
+			"allListsHaveProgress": "Všetky zoznamy majú pokrok",
+			"listNotStarted": "zoznam nezačatý",
+			"listsNotStarted": "zoznamy nezačaté"
+		},
+		"chart": {
+			"title": "Prehľad zoznamov",
+			"description": "Rozdelenie vašich nákupných zoznamov"
+		},
+		"emptyState": {
+			"active": {
+				"title": "Žiadne aktívne zoznamy",
+				"description": "Vytvorte svoj prvý nákupný zoznam a začnite",
+				"action": "Vytvoriť zoznam"
+			},
+			"archived": {
+				"title": "Žiadne archivované zoznamy",
+				"description": "Archivované zoznamy sa zobrazia tu"
+			},
+			"search": {
+				"title": "Nenašli sa žiadne výsledky",
+				"description": "Skúste upraviť vyhľadávanie",
+				"action": "Vymazať vyhľadávanie"
+			}
+		},
+		"dialogs": {
+			"createList": {
+				"title": "Vytvoriť nákupný zoznam",
+				"description": "Dajte novému zoznamu názov",
+				"placeholder": "napr. Týždenný nákup",
+				"cancel": "Zrušiť",
+				"create": "Vytvoriť zoznam"
+			}
+		},
+		"toast": {
+			"created": "vytvorené",
+			"archived": "archivované",
+			"restored": "obnovené",
+			"deleted": "zmazané",
+			"failedToCreate": "Nepodarilo sa vytvoriť zoznam",
+			"failedToArchive": "Nepodarilo sa archivovať zoznam",
+			"failedToRestore": "Nepodarilo sa obnoviť zoznam",
+			"failedToDelete": "Nepodarilo sa zmazať zoznam"
+		}
+	},
+	"listDetail": {
+		"backToLists": "Späť na zoznamy",
+		"editListName": "Upraviť názov zoznamu",
+		"archived": "Archivované",
+		"created": "Vytvorené",
+		"updated": "Aktualizované",
+		"ago": "pred",
+		"progress": {
+			"item": "položka",
+			"items": "položiek",
+			"completed": "dokončené",
+			"pending": "čakajúce",
+			"complete": "hotovo"
+		},
+		"members": {
+			"owner": "Vlastník",
+			"member": "člen",
+			"members": "členov",
+			"noCollaborators": "Zatiaľ žiadni spolupracovníci",
+			"clickInvite": "Kliknutím na Pozvať pridáte členov"
+		},
+		"chart": {
+			"title": "Pokrok položiek",
+			"description": "Vizuálne rozdelenie dokončených a čakajúcich položiek",
+			"noItems": "Žiadne položky na zobrazenie"
+		},
+		"tabs": {
+			"unresolved": "Nedokončené",
+			"all": "Všetky",
+			"resolved": "Dokončené"
+		},
+		"addItem": "Pridať položku",
+		"emptyState": {
+			"unresolved": {
+				"title": "Všetky položky dokončené!",
+				"description": "Výborne! Všetky položky v tomto zozname sú hotové."
+			},
+			"all": {
+				"title": "Zatiaľ žiadne položky",
+				"description": "Pridajte prvú položku a začnite nakupovať",
+				"action": "Pridať položku"
+			},
+			"resolved": {
+				"title": "Žiadne dokončené položky",
+				"description": "Dokončené položky sa zobrazia tu"
+			}
+		},
+		"dialogs": {
+			"addItem": {
+				"title": "Pridať položku",
+				"description": "Pridajte novú položku do nákupného zoznamu",
+				"titleLabel": "Názov položky",
+				"titlePlaceholder": "napr. Mlieko",
+				"notesLabel": "Poznámky (voliteľné)",
+				"notesPlaceholder": "Pridajte podrobnosti...",
+				"cancel": "Zrušiť",
+				"add": "Pridať položku"
+			},
+			"addMember": {
+				"title": "Pozvať člena",
+				"description": "Pridajte niekoho na spoluprácu na tomto zozname",
+				"emailLabel": "E-mailová adresa",
+				"emailPlaceholder": "kolega@priklad.sk",
+				"cancel": "Zrušiť",
+				"invite": "Poslať pozvánku"
+			},
+			"updateList": {
+				"title": "Upraviť názov zoznamu",
+				"description": "Aktualizujte názov vášho nákupného zoznamu",
+				"nameLabel": "Názov zoznamu",
+				"cancel": "Zrušiť",
+				"update": "Aktualizovať názov"
+			},
+			"removeMember": {
+				"title": "Odstrániť člena",
+				"description": "Naozaj chcete odstrániť {{name}} z tohto zoznamu?",
+				"cancel": "Zrušiť",
+				"remove": "Odstrániť člena"
+			},
+			"deleteItem": {
+				"title": "Zmazať položku",
+				"description": "Naozaj chcete zmazať túto položku?",
+				"cancel": "Zrušiť",
+				"delete": "Zmazať"
+			}
+		},
+		"toast": {
+			"itemAdded": "pridané do zoznamu",
+			"itemDeleted": "Položka zmazaná",
+			"memberRemoved": "Člen odstránený",
+			"listNameUpdated": "Názov zoznamu aktualizovaný",
+			"failedToLoad": "Nepodarilo sa načítať zoznam. Skúste to prosím znova.",
+			"noAccess": "Tento zoznam neexistuje alebo nemáte prístup",
+			"failedToAddItem": "Nepodarilo sa pridať položku. Skúste to prosím znova.",
+			"failedToUpdateItem": "Nepodarilo sa aktualizovať položku. Skúste to prosím znova.",
+			"failedToDeleteItem": "Nepodarilo sa zmazať položku. Skúste to prosím znova.",
+			"failedToRemoveMember": "Nepodarilo sa odstrániť člena. Skúste to prosím znova.",
+			"failedToUpdateList": "Nepodarilo sa aktualizovať zoznam. Skúste to prosím znova."
+		}
+	},
+	"listCard": {
+		"items": "položiek",
+		"completed": "dokončené",
+		"owner": "Vlastník",
+		"member": "Člen",
+		"archive": "Archivovať",
+		"unarchive": "Obnoviť",
+		"delete": "Zmazať",
+		"viewList": "Zobraziť zoznam"
 	}
 }

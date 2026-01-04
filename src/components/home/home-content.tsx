@@ -17,10 +17,13 @@ import ListGrid from './list-grid';
 import { DashboardListSummaryChart } from '@/components/charts/dashboard-list-summary-chart';
 import { StatsCards } from './stats-cards';
 import { QuickStats } from './quick-stats';
+import { useTranslation } from 'react-i18next';
+import '@/lib/i18n';
 
 type TabValue = 'active' | 'archived';
 
 export function HomeContent() {
+	const { t } = useTranslation();
 	const [activeTab, setActiveTab] = useState<TabValue>('active');
 	const [searchQuery, setSearchQuery] = useState('');
 	const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
@@ -52,10 +55,10 @@ export function HomeContent() {
 	const handleCreateList = async (name: string) => {
 		const result = await createNewList(name);
 		if (result) {
-			toast.success(`"${name}" created`);
+			toast.success(`"${name}" ${t('home.toast.created')}`);
 			setIsCreateDialogOpen(false);
 		} else {
-			toast.error('Failed to create list');
+			toast.error(t('home.toast.failedToCreate'));
 		}
 	};
 
@@ -63,9 +66,9 @@ export function HomeContent() {
 		const list = lists.find((l) => l.id === id);
 		const success = await archiveListById(id);
 		if (success) {
-			toast.success(`"${list?.name}" archived`);
+			toast.success(`"${list?.name}" ${t('home.toast.archived')}`);
 		} else {
-			toast.error('Failed to archive list');
+			toast.error(t('home.toast.failedToArchive'));
 		}
 	};
 
@@ -73,9 +76,9 @@ export function HomeContent() {
 		const list = lists.find((l) => l.id === id);
 		const success = await unarchiveListById(id);
 		if (success) {
-			toast.success(`"${list?.name}" restored`);
+			toast.success(`"${list?.name}" ${t('home.toast.restored')}`);
 		} else {
-			toast.error('Failed to restore list');
+			toast.error(t('home.toast.failedToRestore'));
 		}
 	};
 
@@ -83,9 +86,9 @@ export function HomeContent() {
 		const list = lists.find((l) => l.id === id);
 		const success = await deleteListById(id);
 		if (success) {
-			toast.success(`"${list?.name}" deleted`);
+			toast.success(`"${list?.name}" ${t('home.toast.deleted')}`);
 		} else {
-			toast.error('Failed to delete list');
+			toast.error(t('home.toast.failedToDelete'));
 		}
 	};
 
@@ -94,7 +97,7 @@ export function HomeContent() {
 		return (
 			<div className="flex min-h-[60vh] flex-col items-center justify-center gap-3">
 				<Spinner className="size-6 text-primary" />
-				<p className="text-sm text-muted-foreground">Loading your lists...</p>
+				<p className="text-sm text-muted-foreground">{t('common.loading')}</p>
 			</div>
 		);
 	}
@@ -105,18 +108,18 @@ export function HomeContent() {
 				<div className="space-y-6">
 					{/* Header */}
 					<header className="space-y-1">
-						<h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">Shopping Lists</h1>
+						<h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">{t('home.title')}</h1>
 						{activeLists.length > 0 && (
 							<p className="text-sm text-muted-foreground">
 								{pendingItems > 0 ? (
 									<>
 										<span className="font-medium text-foreground">{pendingItems}</span>
-										{' items to buy across '}
+										{' ' + t('home.itemsToBuy') + ' '}
 										<span className="font-medium text-foreground">{activeLists.length}</span>
-										{' lists'}
+										{' ' + t('home.lists')}
 									</>
 								) : (
-									'All caught up! 🎉'
+									t('home.allCaughtUp')
 								)}
 							</p>
 						)}
@@ -131,8 +134,8 @@ export function HomeContent() {
 							{/* Chart */}
 							<Card className="lg:col-span-7">
 								<CardHeader>
-									<CardTitle>Lists Overview</CardTitle>
-									<CardDescription>Distribution of your shopping lists</CardDescription>
+									<CardTitle>{t('home.chart.title')}</CardTitle>
+									<CardDescription>{t('home.chart.description')}</CardDescription>
 								</CardHeader>
 								<CardContent>
 									<DashboardListSummaryChart lists={activeLists} />
@@ -151,7 +154,7 @@ export function HomeContent() {
 							<Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
 							<Input
 								type="text"
-								placeholder="Search lists..."
+								placeholder={t('home.searchPlaceholder')}
 								value={searchQuery}
 								onChange={(e) => setSearchQuery(e.target.value)}
 								className="pl-9 pr-9"
@@ -170,14 +173,14 @@ export function HomeContent() {
 						{/* Create button */}
 						<Button onClick={() => setIsCreateDialogOpen(true)} className="gap-2">
 							<Plus className="h-4 w-4" />
-							New List
+							{t('home.newList')}
 						</Button>
 					</div>
 
 					{/* Search results indicator */}
 					{searchQuery && (
 						<p className="text-sm text-muted-foreground">
-							{filteredLists.length} result{filteredLists.length !== 1 && 's'}
+							{filteredLists.length} {filteredLists.length !== 1 ? t('home.results_plural') : t('home.results')}
 						</p>
 					)}
 
@@ -186,7 +189,7 @@ export function HomeContent() {
 						<TabsList>
 							<TabsTrigger value="active">
 								<ShoppingBag className="mr-2 h-4 w-4" />
-								Active
+								{t('home.tabs.active')}
 								{activeLists.length > 0 && (
 									<Badge variant="secondary" className="ml-2">
 										{activeLists.length}
@@ -195,7 +198,7 @@ export function HomeContent() {
 							</TabsTrigger>
 							<TabsTrigger value="archived">
 								<Archive className="mr-2 h-4 w-4" />
-								Archived
+								{t('home.tabs.archived')}
 								{archivedLists.length > 0 && (
 									<Badge variant="outline" className="ml-2">
 										{archivedLists.length}

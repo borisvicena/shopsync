@@ -15,6 +15,8 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { useTranslation } from 'react-i18next';
+import '@/lib/i18n';
 
 type MembersSectionProps = {
 	owner: User;
@@ -25,6 +27,7 @@ type MembersSectionProps = {
 };
 
 export function MembersSection({ owner, members, isOwner, onRemoveMember, onAddMember }: MembersSectionProps) {
+	const { t } = useTranslation();
 	const [memberToRemove, setMemberToRemove] = useState<User | null>(null);
 
 	const handleConfirmRemove = () => {
@@ -57,7 +60,7 @@ export function MembersSection({ owner, members, isOwner, onRemoveMember, onAddM
 					<div className="flex flex-col">
 						<p className="text-sm font-medium text-foreground">{owner.name}</p>
 						<Badge variant="secondary" className="text-xs w-fit">
-							Owner
+							{t('listDetail.members.owner')}
 						</Badge>
 					</div>
 				</div>
@@ -99,7 +102,7 @@ export function MembersSection({ owner, members, isOwner, onRemoveMember, onAddM
 							)}
 						</div>
 						<span className="text-sm text-muted-foreground">
-							{members.length === 1 ? '1 member' : `${members.length} members`}
+							{members.length === 1 ? `1 ${t('listDetail.members.member')}` : `${members.length} ${t('listDetail.members.members')}`}
 						</span>
 					</div>
 				)}
@@ -108,14 +111,14 @@ export function MembersSection({ owner, members, isOwner, onRemoveMember, onAddM
 				{isOwner && (
 					<Button variant="outline" size="sm" onClick={onAddMember} className="ml-auto gap-2">
 						<UserPlus className="h-4 w-4" />
-						<span>Invite</span>
+						<span>{t('common.invite')}</span>
 					</Button>
 				)}
 
 				{/* Empty state text */}
 				{members.length === 0 && (
 					<p className="text-sm text-muted-foreground ml-auto">
-						No collaborators yet {isOwner && '• Click Invite to add members'}
+						{t('listDetail.members.noCollaborators')} {isOwner && `• ${t('listDetail.members.clickInvite')}`}
 					</p>
 				)}
 			</div>

@@ -1,13 +1,18 @@
+'use client';
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ShoppingListSummary } from '@/lib/types';
 import { AlertCircle, Sparkles, Target } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import '@/lib/i18n';
 
 interface QuickStatsProps {
 	lists: ShoppingListSummary[];
 }
 
 export function QuickStats({ lists }: QuickStatsProps) {
+	const { t } = useTranslation();
 	// Most active list (list with most total items)
 	const mostActiveList = lists.reduce((max, list) =>
 		list.itemStats.total > (max?.itemStats.total || 0) ? list : max,
@@ -29,8 +34,8 @@ export function QuickStats({ lists }: QuickStatsProps) {
 	return (
 		<Card className="lg:col-span-5">
 			<CardHeader>
-				<CardTitle>Quick Insights</CardTitle>
-				<CardDescription>Key stats at a glance</CardDescription>
+				<CardTitle>{t('home.quickStats.title')}</CardTitle>
+				<CardDescription>{t('home.quickStats.description')}</CardDescription>
 			</CardHeader>
 			<CardContent className="space-y-4">
 				{/* Most Active List */}
@@ -39,16 +44,16 @@ export function QuickStats({ lists }: QuickStatsProps) {
 						<Sparkles className="h-4 w-4 text-primary" />
 					</div>
 					<div className="flex-1 space-y-1">
-						<p className="text-sm font-medium">Most Active List</p>
+						<p className="text-sm font-medium">{t('home.quickStats.mostActiveList')}</p>
 						{mostActiveList ? (
 							<>
 								<p className="text-sm text-muted-foreground">{mostActiveList.name}</p>
 								<Badge variant="secondary" className="text-xs">
-									{mostActiveList.itemStats.total} items
+									{mostActiveList.itemStats.total} {t('home.quickStats.items')}
 								</Badge>
 							</>
 						) : (
-							<p className="text-sm text-muted-foreground">No lists yet</p>
+							<p className="text-sm text-muted-foreground">{t('home.quickStats.noListsYet')}</p>
 						)}
 					</div>
 				</div>
@@ -59,17 +64,17 @@ export function QuickStats({ lists }: QuickStatsProps) {
 						<Target className="h-4 w-4 text-green-600 dark:text-green-400" />
 					</div>
 					<div className="flex-1 space-y-1">
-						<p className="text-sm font-medium">Nearly Complete</p>
+						<p className="text-sm font-medium">{t('home.quickStats.nearlyComplete')}</p>
 						<p className="text-sm text-muted-foreground">
 							{nearlyCompleteLists.length === 0
-								? 'No lists close to completion'
+								? t('home.quickStats.noListsCloseToCompletion')
 								: nearlyCompleteLists.length === 1
-								? '1 list is almost done'
-								: `${nearlyCompleteLists.length} lists almost done`}
+								? `1 ${t('home.quickStats.listAlmostDone')}`
+								: `${nearlyCompleteLists.length} ${t('home.quickStats.listsAlmostDone')}`}
 						</p>
 						{nearlyCompleteLists.length > 0 && (
 							<Badge variant="secondary" className="text-xs">
-								{'>'} 80% complete
+								{'>'} 80% {t('home.quickStats.complete')}
 							</Badge>
 						)}
 					</div>
@@ -81,17 +86,17 @@ export function QuickStats({ lists }: QuickStatsProps) {
 						<AlertCircle className="h-4 w-4 text-amber-600 dark:text-amber-400" />
 					</div>
 					<div className="flex-1 space-y-1">
-						<p className="text-sm font-medium">Needs Attention</p>
+						<p className="text-sm font-medium">{t('home.quickStats.needsAttention')}</p>
 						<p className="text-sm text-muted-foreground">
 							{needsAttentionLists.length === 0
-								? 'All lists have progress'
+								? t('home.quickStats.allListsHaveProgress')
 								: needsAttentionLists.length === 1
-								? '1 list not started'
-								: `${needsAttentionLists.length} lists not started`}
+								? `1 ${t('home.quickStats.listNotStarted')}`
+								: `${needsAttentionLists.length} ${t('home.quickStats.listsNotStarted')}`}
 						</p>
 						{needsAttentionLists.length > 0 && (
 							<Badge variant="secondary" className="text-xs">
-								0% complete
+								0% {t('home.quickStats.complete')}
 							</Badge>
 						)}
 					</div>

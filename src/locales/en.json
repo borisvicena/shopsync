@@ -15,6 +15,208 @@
 	"common": {
 		"loading": "Loading...",
 		"cancel": "Cancel",
-		"save": "Save"
+		"save": "Save",
+		"delete": "Delete",
+		"edit": "Edit",
+		"add": "Add",
+		"create": "Create",
+		"update": "Update",
+		"remove": "Remove",
+		"invite": "Invite",
+		"close": "Close",
+		"confirm": "Confirm",
+		"back": "Back"
+	},
+	"home": {
+		"title": "Shopping Lists",
+		"itemsToBuy": "items to buy across",
+		"lists": "lists",
+		"allCaughtUp": "All caught up! 🎉",
+		"searchPlaceholder": "Search lists...",
+		"newList": "New List",
+		"results": "result",
+		"results_plural": "results",
+		"tabs": {
+			"active": "Active",
+			"archived": "Archived"
+		},
+		"stats": {
+			"totalLists": "Total Lists",
+			"totalItems": "Total Items",
+			"itemsCompleted": "Items Completed",
+			"completionRate": "Completion Rate",
+			"activeList": "active list",
+			"activeLists": "active lists",
+			"itemToTrack": "item to track",
+			"itemsToTrack": "items to track",
+			"of": "of",
+			"done": "done",
+			"overallProgress": "overall progress"
+		},
+		"quickStats": {
+			"title": "Quick Insights",
+			"description": "Key stats at a glance",
+			"mostActiveList": "Most Active List",
+			"noListsYet": "No lists yet",
+			"items": "items",
+			"nearlyComplete": "Nearly Complete",
+			"noListsCloseToCompletion": "No lists close to completion",
+			"listAlmostDone": "list is almost done",
+			"listsAlmostDone": "lists almost done",
+			"complete": "complete",
+			"needsAttention": "Needs Attention",
+			"allListsHaveProgress": "All lists have progress",
+			"listNotStarted": "list not started",
+			"listsNotStarted": "lists not started"
+		},
+		"chart": {
+			"title": "Lists Overview",
+			"description": "Distribution of your shopping lists"
+		},
+		"emptyState": {
+			"active": {
+				"title": "No active lists",
+				"description": "Create your first shopping list to get started",
+				"action": "Create List"
+			},
+			"archived": {
+				"title": "No archived lists",
+				"description": "Archived lists will appear here"
+			},
+			"search": {
+				"title": "No results found",
+				"description": "Try adjusting your search",
+				"action": "Clear search"
+			}
+		},
+		"dialogs": {
+			"createList": {
+				"title": "Create Shopping List",
+				"description": "Give your new list a name to get started",
+				"placeholder": "e.g., Weekly Groceries",
+				"cancel": "Cancel",
+				"create": "Create List"
+			}
+		},
+		"toast": {
+			"created": "created",
+			"archived": "archived",
+			"restored": "restored",
+			"deleted": "deleted",
+			"failedToCreate": "Failed to create list",
+			"failedToArchive": "Failed to archive list",
+			"failedToRestore": "Failed to restore list",
+			"failedToDelete": "Failed to delete list"
+		}
+	},
+	"listDetail": {
+		"backToLists": "Back to Lists",
+		"editListName": "Edit List Name",
+		"archived": "Archived",
+		"created": "Created",
+		"updated": "Updated",
+		"ago": "ago",
+		"progress": {
+			"item": "item",
+			"items": "items",
+			"completed": "completed",
+			"pending": "pending",
+			"complete": "complete"
+		},
+		"members": {
+			"owner": "Owner",
+			"member": "member",
+			"members": "members",
+			"noCollaborators": "No collaborators yet",
+			"clickInvite": "Click Invite to add members"
+		},
+		"chart": {
+			"title": "Items Progress",
+			"description": "Visual breakdown of completed and pending items",
+			"noItems": "No items to display"
+		},
+		"tabs": {
+			"unresolved": "Unresolved",
+			"all": "All",
+			"resolved": "Resolved"
+		},
+		"addItem": "Add Item",
+		"emptyState": {
+			"unresolved": {
+				"title": "All items completed!",
+				"description": "Great job! All items on this list are done."
+			},
+			"all": {
+				"title": "No items yet",
+				"description": "Add your first item to start shopping",
+				"action": "Add Item"
+			},
+			"resolved": {
+				"title": "No completed items",
+				"description": "Completed items will appear here"
+			}
+		},
+		"dialogs": {
+			"addItem": {
+				"title": "Add Item",
+				"description": "Add a new item to your shopping list",
+				"titleLabel": "Item Name",
+				"titlePlaceholder": "e.g., Milk",
+				"notesLabel": "Notes (optional)",
+				"notesPlaceholder": "Add any details...",
+				"cancel": "Cancel",
+				"add": "Add Item"
+			},
+			"addMember": {
+				"title": "Invite Member",
+				"description": "Add someone to collaborate on this list",
+				"emailLabel": "Email Address",
+				"emailPlaceholder": "colleague@example.com",
+				"cancel": "Cancel",
+				"invite": "Send Invite"
+			},
+			"updateList": {
+				"title": "Edit List Name",
+				"description": "Update the name of your shopping list",
+				"nameLabel": "List Name",
+				"cancel": "Cancel",
+				"update": "Update Name"
+			},
+			"removeMember": {
+				"title": "Remove Member",
+				"description": "Are you sure you want to remove {{name}} from this list?",
+				"cancel": "Cancel",
+				"remove": "Remove Member"
+			},
+			"deleteItem": {
+				"title": "Delete Item",
+				"description": "Are you sure you want to delete this item?",
+				"cancel": "Cancel",
+				"delete": "Delete"
+			}
+		},
+		"toast": {
+			"itemAdded": "added to list",
+			"itemDeleted": "Item deleted",
+			"memberRemoved": "Member removed",
+			"listNameUpdated": "List name updated",
+			"failedToLoad": "Failed to load list. Please try again.",
+			"noAccess": "This list doesn't exist or you don't have access",
+			"failedToAddItem": "Failed to add item. Please try again.",
+			"failedToUpdateItem": "Failed to update item. Please try again.",
+			"failedToDeleteItem": "Failed to delete item. Please try again.",
+			"failedToRemoveMember": "Failed to remove member. Please try again.",
+			"failedToUpdateList": "Failed to update list. Please try again."
+		}
+	},
+	"listCard": {
+		"items": "items",
+		"completed": "completed",
+		"owner": "Owner",
+		"member": "Member",
+		"archive": "Archive",
+		"unarchive": "Unarchive",
+		"delete": "Delete",
+		"viewList": "View list"
 	}
 }

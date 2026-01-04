@@ -10,7 +10,7 @@ interface DashboardListSummaryChartProps {
 }
 
 export function DashboardListSummaryChart({ lists }: DashboardListSummaryChartProps) {
-	const chartData = useMemo(() => calculateListsByCompletionStatus(lists), [lists]);
+	const chartData = useMemo(() => calculateListsByCompletionStatus(lists), [lists]) as any;
 
 	if (chartData.length === 0) {
 		return (
@@ -20,7 +20,7 @@ export function DashboardListSummaryChart({ lists }: DashboardListSummaryChartPr
 		);
 	}
 
-	const totalLists = chartData.reduce((sum, item) => sum + item.value, 0);
+	const totalLists = chartData.reduce((sum: number, item: any) => sum + item.value, 0);
 
 	return (
 		<div className="w-full h-[220px] sm:h-[240px] lg:h-[260px]">
@@ -32,14 +32,14 @@ export function DashboardListSummaryChart({ lists }: DashboardListSummaryChartPr
 						cy="50%"
 						labelLine={false}
 						label={({ name, value, percent }) => {
-							const percentage = (percent * 100).toFixed(0);
+							const percentage = ((percent || 0) * 100).toFixed(0);
 							return `${name}: ${value} (${percentage}%)`;
 						}}
 						outerRadius="60%"
 						fill="#8884d8"
 						dataKey="value"
 					>
-						{chartData.map((entry, index) => (
+						{chartData.map((entry: any, index: number) => (
 							<Cell key={`cell-${index}`} fill={entry.color} />
 						))}
 					</Pie>

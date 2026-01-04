@@ -4,12 +4,15 @@ import { useMemo } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import { ListItem } from '@/lib/types';
 import { calculateItemCompletion, getChartColors } from '@/lib/chart-utils';
+import { useTranslation } from 'react-i18next';
+import '@/lib/i18n';
 
 interface ListDetailItemsChartProps {
 	items: ListItem[];
 }
 
 export function ListDetailItemsChart({ items }: ListDetailItemsChartProps) {
+	const { t } = useTranslation();
 	const stats = useMemo(() => calculateItemCompletion(items), [items]);
 	const colors = useMemo(() => getChartColors(), []);
 
@@ -24,7 +27,7 @@ export function ListDetailItemsChart({ items }: ListDetailItemsChartProps) {
 	if (items.length === 0) {
 		return (
 			<div className="flex h-[240px] sm:h-[260px] lg:h-[280px] items-center justify-center text-sm text-muted-foreground">
-				No items to display
+				{t('listDetail.chart.noItems')}
 			</div>
 		);
 	}
@@ -39,7 +42,7 @@ export function ListDetailItemsChart({ items }: ListDetailItemsChartProps) {
 						cy="50%"
 						labelLine={false}
 						label={({ name, value, percent }) => {
-							const percentage = (percent * 100).toFixed(0);
+							const percentage = ((percent || 0) * 100).toFixed(0);
 							return `${name}: ${value} (${percentage}%)`;
 						}}
 						outerRadius="55%"

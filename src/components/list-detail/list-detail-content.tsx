@@ -21,10 +21,13 @@ import { toast } from 'sonner';
 import { ItemsList } from './item-list';
 import { useAuth } from '@/contexts/auth-context';
 import { ListDetailItemsChart } from '@/components/charts/list-detail-items-chart';
+import { useTranslation } from 'react-i18next';
+import '@/lib/i18n';
 
 type TabValue = 'unresolved' | 'all' | 'resolved';
 
 export function ListDetailContent({ listId }: { listId: string }) {
+	const { t } = useTranslation();
 	const [listData, setListData] = useState<ShoppingList | null>(null);
 	const [activeTab, setActiveTab] = useState<TabValue>('unresolved');
 	const [isAddItemOpen, setIsAddItemOpen] = useState(false);
@@ -45,14 +48,14 @@ export function ListDetailContent({ listId }: { listId: string }) {
 			const data = await getListById(listId);
 
 			if (!data) {
-				toast.error("This list doesn't exist or you don't have access");
+				toast.error(t('listDetail.toast.noAccess'));
 				router.push('/');
 				return;
 			}
 
 			setListData(data);
 		} catch (error) {
-			toast.error('Failed to load list. Please try again.');
+			toast.error(t('listDetail.toast.failedToLoad'));
 		} finally {
 			setIsLoading(false);
 		}
@@ -86,7 +89,7 @@ export function ListDetailContent({ listId }: { listId: string }) {
 				);
 			}
 		} catch (error) {
-			toast.error('Failed to update item. Please try again.');
+			toast.error(t('listDetail.toast.failedToUpdateItem'));
 		}
 	};
 
@@ -102,10 +105,10 @@ export function ListDetailContent({ listId }: { listId: string }) {
 						  }
 						: prev
 				);
-				toast.success('Item deleted');
+				toast.success(t('listDetail.toast.itemDeleted'));
 			}
 		} catch (error) {
-			toast.error('Failed to delete item. Please try again.');
+			toast.error(t('listDetail.toast.failedToDeleteItem'));
 		}
 	};
 
@@ -121,10 +124,10 @@ export function ListDetailContent({ listId }: { listId: string }) {
 						  }
 						: prev
 				);
-				toast.success('Member removed');
+				toast.success(t('listDetail.toast.memberRemoved'));
 			}
 		} catch (error) {
-			toast.error('Failed to remove member. Please try again.');
+			toast.error(t('listDetail.toast.failedToRemoveMember'));
 		}
 	};
 
@@ -140,10 +143,10 @@ export function ListDetailContent({ listId }: { listId: string }) {
 						  }
 						: prev
 				);
-				toast.success(`"${title}" added to list`);
+				toast.success(`"${title}" ${t('listDetail.toast.itemAdded')}`);
 			}
 		} catch (error) {
-			toast.error('Failed to add item. Please try again.');
+			toast.error(t('listDetail.toast.failedToAddItem'));
 		}
 	};
 
@@ -152,10 +155,10 @@ export function ListDetailContent({ listId }: { listId: string }) {
 			const updated = await updateListName(listId, name);
 			if (updated) {
 				setListData(updated);
-				toast.success('List name updated');
+				toast.success(t('listDetail.toast.listNameUpdated'));
 			}
 		} catch (error) {
-			toast.error('Failed to update list. Please try again.');
+			toast.error(t('listDetail.toast.failedToUpdateList'));
 		}
 	};
 
@@ -174,10 +177,10 @@ export function ListDetailContent({ listId }: { listId: string }) {
 					<Link
 						href="/"
 						className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-						aria-label="Back to lists"
+						aria-label={t('listDetail.backToLists')}
 					>
 						<ChevronLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-						<span>Back to Lists</span>
+						<span>{t('listDetail.backToLists')}</span>
 					</Link>
 
 					{/* List Header */}
@@ -199,24 +202,24 @@ export function ListDetailContent({ listId }: { listId: string }) {
 										<ShoppingCart className="h-4 w-4 text-muted-foreground" />
 										<span className="font-medium">{totalItems}</span>
 										<span className="text-muted-foreground">
-											{totalItems === 1 ? 'item' : 'items'}
+											{totalItems === 1 ? t('listDetail.progress.item') : t('listDetail.progress.items')}
 										</span>
 									</div>
 									<div className="h-4 w-px bg-border" />
 									<div className="flex items-center gap-2">
 										<CheckCircle2 className="h-4 w-4 text-green-600" />
 										<span className="font-medium">{completedItems}</span>
-										<span className="text-muted-foreground">completed</span>
+										<span className="text-muted-foreground">{t('listDetail.progress.completed')}</span>
 									</div>
 									<div className="h-4 w-px bg-border" />
 									<div className="flex items-center gap-2">
 										<Circle className="h-4 w-4 text-amber-600" />
 										<span className="font-medium">{pendingItems}</span>
-										<span className="text-muted-foreground">pending</span>
+										<span className="text-muted-foreground">{t('listDetail.progress.pending')}</span>
 									</div>
 								</div>
 								<Badge variant="secondary" className="text-sm font-semibold">
-									{completionRate}% complete
+									{completionRate}% {t('listDetail.progress.complete')}
 								</Badge>
 							</div>
 							<Progress value={completionRate} className="h-2" />
@@ -236,8 +239,8 @@ export function ListDetailContent({ listId }: { listId: string }) {
 					{listData.items.length > 0 && (
 						<Card>
 							<CardHeader>
-								<CardTitle>Items Progress</CardTitle>
-								<CardDescription>Visual breakdown of completed and pending items</CardDescription>
+								<CardTitle>{t('listDetail.chart.title')}</CardTitle>
+								<CardDescription>{t('listDetail.chart.description')}</CardDescription>
 							</CardHeader>
 							<CardContent>
 								<ListDetailItemsChart items={listData.items} />
@@ -250,16 +253,16 @@ export function ListDetailContent({ listId }: { listId: string }) {
 							<Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as TabValue)} className="w-full">
 								<TabsList className="grid w-full max-w-md grid-cols-3">
 									<TabsTrigger value="unresolved" className="relative">
-										Unresolved
+										{t('listDetail.tabs.unresolved')}
 										{listData.items.filter((i) => !i.completed).length > 0 && (
 											<span className="ml-2 rounded-full bg-zinc-900 px-2 py-0.5 text-xs text-white">
 												{listData.items.filter((i) => !i.completed).length}
 											</span>
 										)}
 									</TabsTrigger>
-									<TabsTrigger value="all">All</TabsTrigger>
+									<TabsTrigger value="all">{t('listDetail.tabs.all')}</TabsTrigger>
 									<TabsTrigger value="resolved">
-										Resolved
+										{t('listDetail.tabs.resolved')}
 										{listData.items.filter((i) => i.completed).length > 0 && (
 											<span className="ml-2 rounded-full bg-green-100 px-2 py-0.5 text-xs text-green-700">
 												{listData.items.filter((i) => i.completed).length}
@@ -271,7 +274,7 @@ export function ListDetailContent({ listId }: { listId: string }) {
 
 							<Button onClick={() => setIsAddItemOpen(true)} className="shrink-0 gap-2 shadow-sm" size="sm">
 								<Plus className="h-4 w-4" />
-								<span className="hidden sm:inline">Add Item</span>
+								<span className="hidden sm:inline">{t('listDetail.addItem')}</span>
 							</Button>
 						</div>
 

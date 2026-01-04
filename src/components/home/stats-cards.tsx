@@ -1,13 +1,18 @@
+'use client';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { ListChecks, ShoppingCart, CheckCircle2, TrendingUp } from 'lucide-react';
 import { ShoppingListSummary } from '@/lib/types';
+import { useTranslation } from 'react-i18next';
+import '@/lib/i18n';
 
 interface StatsCardsProps {
 	lists: ShoppingListSummary[];
 }
 
 export function StatsCards({ lists }: StatsCardsProps) {
+	const { t } = useTranslation();
 	// Calculate stats
 	const totalLists = lists.length;
 	const totalItems = lists.reduce((sum, list) => sum + list.itemStats.total, 0);
@@ -16,30 +21,30 @@ export function StatsCards({ lists }: StatsCardsProps) {
 
 	const stats = [
 		{
-			title: 'Total Lists',
+			title: t('home.stats.totalLists'),
 			value: totalLists,
-			description: totalLists === 1 ? 'active list' : 'active lists',
+			description: totalLists === 1 ? t('home.stats.activeList') : t('home.stats.activeLists'),
 			icon: ListChecks,
 			iconColor: 'text-primary',
 		},
 		{
-			title: 'Total Items',
+			title: t('home.stats.totalItems'),
 			value: totalItems,
-			description: totalItems === 1 ? 'item to track' : 'items to track',
+			description: totalItems === 1 ? t('home.stats.itemToTrack') : t('home.stats.itemsToTrack'),
 			icon: ShoppingCart,
 			iconColor: 'text-blue-600',
 		},
 		{
-			title: 'Items Completed',
+			title: t('home.stats.itemsCompleted'),
 			value: completedItems,
-			description: `${completedItems} of ${totalItems} done`,
+			description: `${completedItems} ${t('home.stats.of')} ${totalItems} ${t('home.stats.done')}`,
 			icon: CheckCircle2,
 			iconColor: 'text-green-600',
 		},
 		{
-			title: 'Completion Rate',
+			title: t('home.stats.completionRate'),
 			value: `${completionRate}%`,
-			description: 'overall progress',
+			description: t('home.stats.overallProgress'),
 			icon: TrendingUp,
 			iconColor: 'text-emerald-600',
 			showProgress: true,

@@ -64,10 +64,10 @@ export const calculateListsByCompletionStatus = (lists: ShoppingListSummary[]): 
 	});
 
 	return [
-		{ name: 'Complete', value: statusCounts.complete, color: colors[0] }, // chart-1 (green)
-		{ name: 'In Progress', value: statusCounts.inProgress, color: colors[3] }, // chart-4 (amber)
-		{ name: 'Not Started', value: statusCounts.notStarted, color: colors[4] }, // chart-5 (coral)
-		{ name: 'Empty', value: statusCounts.empty, color: colors[1] }, // chart-2 (teal)
+		{ name: 'Complete' as ListStatus, value: statusCounts.complete, color: colors[0] }, // chart-1 (green)
+		{ name: 'In Progress' as ListStatus, value: statusCounts.inProgress, color: colors[3] }, // chart-4 (amber)
+		{ name: 'Not Started' as ListStatus, value: statusCounts.notStarted, color: colors[4] }, // chart-5 (coral)
+		{ name: 'Empty' as ListStatus, value: statusCounts.empty, color: colors[1] }, // chart-2 (teal)
 	].filter((item) => item.value > 0); // Only return categories with values
 };
 
