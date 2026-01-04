@@ -43,7 +43,7 @@ export function MembersSection({ owner, members, isOwner, onRemoveMember, onAddM
 
 	return (
 		<>
-			<div className="flex flex-wrap items-center gap-4 rounded-lg border bg-card p-4">
+			<div className="flex flex-col sm:flex-row sm:items-center gap-4 rounded-lg border bg-card p-4">
 				{/* Owner Avatar + Name */}
 				<div className="flex items-center gap-2">
 					<div className="relative">
@@ -67,7 +67,7 @@ export function MembersSection({ owner, members, isOwner, onRemoveMember, onAddM
 
 				{/* Member Avatars (max 3, then +N) */}
 				{members.length > 0 && (
-					<div className="flex items-center gap-2">
+					<div className="flex items-center gap-2 flex-1 min-w-0">
 						<div className="flex -space-x-2">
 							{visibleMembers.map((member) => (
 								<Avatar key={member.id} className="h-10 w-10 border-2 border-background">
@@ -101,7 +101,7 @@ export function MembersSection({ owner, members, isOwner, onRemoveMember, onAddM
 								</DropdownMenu>
 							)}
 						</div>
-						<span className="text-sm text-muted-foreground">
+						<span className="text-sm text-muted-foreground truncate">
 							{members.length === 1 ? `1 ${t('listDetail.members.member')}` : `${members.length} ${t('listDetail.members.members')}`}
 						</span>
 					</div>
@@ -109,7 +109,7 @@ export function MembersSection({ owner, members, isOwner, onRemoveMember, onAddM
 
 				{/* Invite Button */}
 				{isOwner && (
-					<Button variant="outline" size="sm" onClick={onAddMember} className="ml-auto gap-2">
+					<Button variant="outline" size="sm" onClick={onAddMember} className="gap-2 w-full sm:w-auto sm:ml-auto">
 						<UserPlus className="h-4 w-4" />
 						<span>{t('common.invite')}</span>
 					</Button>
@@ -117,7 +117,7 @@ export function MembersSection({ owner, members, isOwner, onRemoveMember, onAddM
 
 				{/* Empty state text */}
 				{members.length === 0 && (
-					<p className="text-sm text-muted-foreground ml-auto">
+					<p className="text-sm text-muted-foreground sm:ml-auto text-center sm:text-left">
 						{t('listDetail.members.noCollaborators')} {isOwner && `• ${t('listDetail.members.clickInvite')}`}
 					</p>
 				)}

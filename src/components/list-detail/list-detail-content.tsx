@@ -196,8 +196,8 @@ export function ListDetailContent({ listId }: { listId: string }) {
 					{/* Progress Overview Bar */}
 					{totalItems > 0 && (
 						<div className="rounded-lg border bg-card p-4 space-y-3">
-							<div className="flex items-center justify-between text-sm">
-								<div className="flex items-center gap-6">
+							<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm">
+								<div className="flex flex-wrap items-center gap-3 sm:gap-6">
 									<div className="flex items-center gap-2">
 										<ShoppingCart className="h-4 w-4 text-muted-foreground" />
 										<span className="font-medium">{totalItems}</span>
@@ -205,20 +205,20 @@ export function ListDetailContent({ listId }: { listId: string }) {
 											{totalItems === 1 ? t('listDetail.progress.item') : t('listDetail.progress.items')}
 										</span>
 									</div>
-									<div className="h-4 w-px bg-border" />
+									<div className="hidden sm:block h-4 w-px bg-border" />
 									<div className="flex items-center gap-2">
 										<CheckCircle2 className="h-4 w-4 text-green-600" />
 										<span className="font-medium">{completedItems}</span>
 										<span className="text-muted-foreground">{t('listDetail.progress.completed')}</span>
 									</div>
-									<div className="h-4 w-px bg-border" />
+									<div className="hidden sm:block h-4 w-px bg-border" />
 									<div className="flex items-center gap-2">
 										<Circle className="h-4 w-4 text-amber-600" />
 										<span className="font-medium">{pendingItems}</span>
 										<span className="text-muted-foreground">{t('listDetail.progress.pending')}</span>
 									</div>
 								</div>
-								<Badge variant="secondary" className="text-sm font-semibold">
+								<Badge variant="secondary" className="text-sm font-semibold w-fit">
 									{completionRate}% {t('listDetail.progress.complete')}
 								</Badge>
 							</div>
@@ -249,22 +249,22 @@ export function ListDetailContent({ listId }: { listId: string }) {
 					)}
 
 					<div className="space-y-6">
-						<div className="flex items-center justify-between gap-4">
-							<Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as TabValue)} className="w-full">
-								<TabsList className="grid w-full max-w-md grid-cols-3">
-									<TabsTrigger value="unresolved" className="relative">
-										{t('listDetail.tabs.unresolved')}
+						<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+							<Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as TabValue)} className="w-full sm:w-auto">
+								<TabsList className="grid w-full sm:max-w-md grid-cols-3 h-auto">
+									<TabsTrigger value="unresolved" className="relative flex-col xs:flex-row gap-1">
+										<span className="truncate">{t('listDetail.tabs.unresolved')}</span>
 										{listData.items.filter((i) => !i.completed).length > 0 && (
-											<span className="ml-2 rounded-full bg-zinc-900 px-2 py-0.5 text-xs text-white">
+											<span className="rounded-full bg-zinc-900 px-1.5 py-0.5 text-xs text-white dark:bg-zinc-100 dark:text-zinc-900">
 												{listData.items.filter((i) => !i.completed).length}
 											</span>
 										)}
 									</TabsTrigger>
-									<TabsTrigger value="all">{t('listDetail.tabs.all')}</TabsTrigger>
-									<TabsTrigger value="resolved">
-										{t('listDetail.tabs.resolved')}
+									<TabsTrigger value="all" className="truncate">{t('listDetail.tabs.all')}</TabsTrigger>
+									<TabsTrigger value="resolved" className="relative flex-col xs:flex-row gap-1">
+										<span className="truncate">{t('listDetail.tabs.resolved')}</span>
 										{listData.items.filter((i) => i.completed).length > 0 && (
-											<span className="ml-2 rounded-full bg-green-100 px-2 py-0.5 text-xs text-green-700">
+											<span className="rounded-full bg-green-100 px-1.5 py-0.5 text-xs text-green-700 dark:bg-green-900 dark:text-green-100">
 												{listData.items.filter((i) => i.completed).length}
 											</span>
 										)}
@@ -272,9 +272,9 @@ export function ListDetailContent({ listId }: { listId: string }) {
 								</TabsList>
 							</Tabs>
 
-							<Button onClick={() => setIsAddItemOpen(true)} className="shrink-0 gap-2 shadow-sm" size="sm">
+							<Button onClick={() => setIsAddItemOpen(true)} className="w-full sm:w-auto shrink-0 gap-2 shadow-sm" size="sm">
 								<Plus className="h-4 w-4" />
-								<span className="hidden sm:inline">{t('listDetail.addItem')}</span>
+								<span>{t('listDetail.addItem')}</span>
 							</Button>
 						</div>
 
